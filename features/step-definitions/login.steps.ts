@@ -1,22 +1,26 @@
 import { Given, When, Then } from '@cucumber/cucumber';
-import { expect } from '@playwright/test';
+import { APIResponse, expect } from '@playwright/test';
 import { login } from '../../src/api/login.api';
+import { account } from '../../src/data/accounts';
 
-let response: any;
+let response: APIResponse;
+let selectedAccount: any;
 
-Given('I have valid login credentials', function () {
-  // dummy step – bisa setup env/variable di sini
+
+Given('I have {string} account', function (accountType: string) {
+  selectedAccount = (account as any)[accountType];
+  if (!selectedAccount) throw new Error(`Account type ${accountType} not found`);
 });
 
-When('I send a POST request to the login endpoint', async function () {
-  response = await login('user@example.com', 'password123');
+When('I send a login request', async function () {
+  response = await login(selectedAccount);
 });
 
-Then('I should receive a 200 status code', function () {
-  expect(response.status()).toBe(200);
-});
+Then('the response status should be {int}', function (statusCode: number) { 
+  expect(response.status()).toEqual(statusCode);
+})
 
 Then('the response should contain a token', async function () {
   const body = await response.json();
-  expect(body.token).toBeDefined();
+  expect(body).toHaveProperty('token');
 });

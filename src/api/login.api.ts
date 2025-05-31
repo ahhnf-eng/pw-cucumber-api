@@ -1,8 +1,13 @@
-import { request } from '@playwright/test';
+import { APIRequestContext, request, APIResponse } from '@playwright/test';
+import dotenv from 'dotenv';
+import { get } from 'http';
 
-export async function login(email: string, password: string) {
-  const context = await request.newContext();
-  return context.post('https://example.com/api/login', {
-    data: { email, password }
+dotenv.config();
+export const login = async (account: any): Promise<APIResponse> => {
+  const endpoint = `${process.env.BASE_URL}/api/login`;
+  const context: APIRequestContext = await request.newContext();
+
+  return context.post(endpoint, {
+    data: account,
   });
-}
+};
