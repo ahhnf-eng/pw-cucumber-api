@@ -1,0 +1,8 @@
+pipelines:
+  branches:
+    main:
+      - step:
+          name: test step 1
+          script:
+            - echo "Building the project..."
+            - echo "Running tests..."
