@@ -2,8 +2,14 @@ pipelines:
   branches:
     main:
       - step:
-          name: test step 1
+          name: Step master pertama
           trigger: automatic
+          image: atlassian/default-image
           script:
-            - echo "Building the project..."
-            - echo "Running tests..."
+            - echo "Step pertama"
+      - step:
+          name: Step master kedua
+          trigger: automatic
+          image: atlassian/default-image
+          script:
+            - echo "Step 2"
