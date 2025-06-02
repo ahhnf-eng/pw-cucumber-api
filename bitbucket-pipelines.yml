@@ -3,13 +3,13 @@ pipelines:
     main:
       - step:
           name: Step master pertama
-          trigger: automatic
+          # trigger: automatic
           image: atlassian/default-image
           script:
             - echo "Step pertama"
       - step:
           name: Step master kedua
-          trigger: automatic
+          # trigger: automatic
           image: atlassian/default-image
           script:
             - echo "Step kedua"
