@@ -12,4 +12,4 @@ pipelines:
           trigger: automatic
           image: atlassian/default-image
           script:
-            - echo "Step 2"
+            - echo "Step kedua"
